@@ -1,11 +1,11 @@
 {
-  "name": "@flancer64/teq-agave-plugin",
+  "name": "@flancer64/teq-agave-tmpl",
   "version": "0.1.0",
   "type": "module",
-  "description": "...",
-  "homepage": "https://github.com/flancer64/teq-agave-plugin/",
+  "description": "TeqFW plugin for server-side rendering (SSR) and text template generation (HTML, JSON, XML, YAML, etc.) using Mustache.",
+  "homepage": "https://github.com/flancer64/teq-agave-tmpl/",
   "bugs": {
-    "url": "https://github.com/flancer64/teq-agave-plugin/issues",
+    "url": "https://github.com/flancer64/teq-agave-tmpl/issues",
     "email": "alex@flancer64.com"
   },
   "license": "Apache-2.0",
@@ -14,7 +14,10 @@
     "email": "alex@flancer64.com",
     "url": "https://github.com/flancer64"
   },
-  "repository": "github:flancer64/teq-agave-plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flancer64/teq-agave-tmpl.git"
+  },
   "scripts": {
     "test:accept": "mocha ./test/accept --recursive",
     "test:unit": "mocha ./test/unit --recursive"
@@ -23,6 +26,7 @@
     "@teqfw/core": ">=0.33.0 <1.0.0",
     "@teqfw/db": ">=0.22.1 <1.0.0",
     "@teqfw/web": ">=0.26.0 <1.0.0",
+    "mustache": "^4.2.0",
     "pg": "^8.13.1"
   },
   "devDependencies": {
