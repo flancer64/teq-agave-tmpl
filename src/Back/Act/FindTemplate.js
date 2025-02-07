@@ -91,8 +91,8 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
                     break;
                 }
             }
-
-            logger.error(`Template '${name}' not found for type '${type}', pkg '${pkg || 'app'}', locales '${locales.join(', ')}'.`);
+            if (!path)
+                logger.error(`Template '${name}' not found for type '${type}', pkg '${pkg || 'app'}', locales '${locales.join(', ')}'.`);
             return {path};
         };
     }
