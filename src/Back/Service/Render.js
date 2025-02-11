@@ -20,7 +20,7 @@ export default class Fl64_Tmpl_Back_Service_Render {
          * Finds, loads, and renders a Mustache template.
          *
          * @param {Object} params
-         * @param {string} params.pkg - NPM package name (or null for app templates).
+         * @param {string} [params.pkg] - NPM package name (or null for app templates).
          * @param {string} params.type - Template type ('web', 'email', etc.).
          * @param {string} params.name - Template name without extension.
          * @param {string} [params.localeUser] - User-defined locale.
@@ -30,16 +30,18 @@ export default class Fl64_Tmpl_Back_Service_Render {
          * @param {Object} [params.partials] - Mustache partial templates.
          * @returns {Promise<{content: string|null}>}
          */
-        this.perform = async function ({
-                                           pkg,
-                                           type,
-                                           name,
-                                           localeUser,
-                                           localeApp,
-                                           localePkg = 'en',
-                                           view = {},
-                                           partials = {}
-                                       }) {
+        this.perform = async function (
+            {
+                pkg,
+                type,
+                name,
+                localeUser,
+                localeApp,
+                localePkg = 'en',
+                view = {},
+                partials = {}
+            }
+        ) {
             let content = null;
             try {
                 // Find the template file path
