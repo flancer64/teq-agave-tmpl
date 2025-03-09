@@ -17,4 +17,8 @@ applications to use built-in plugin templates or replace them with custom ones.
 - **Dynamic template handling**, supporting partials and application-level overrides.
 
 This plugin provides a flexible solution for generating localized content, making it an essential tool for rendering web
-pages, email templates, and other structured text formats within **TeqFW**.  
+pages, email templates, and other structured text formats within **TeqFW**.
+
+## Integration
+
+- `Fl64_Paypal_Back_Api_Adapter`: implement this interface in an application.

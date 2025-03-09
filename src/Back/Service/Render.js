@@ -1,5 +1,15 @@
 import Mustache from 'mustache';
 
+// VARS
+/**
+ * @memberOf Fl64_Tmpl_Back_Service_Render
+ */
+const RESULT = {
+    SUCCESS: 'SUCCESS',
+    UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+};
+Object.freeze(RESULT);
+
 /**
  * @implements {TeqFw_Core_Shared_Api_Service}
  */
@@ -16,6 +26,13 @@ export default class Fl64_Tmpl_Back_Service_Render {
             Fl64_Tmpl_Back_Act_LoadTemplate$: actLoad,
         }
     ) {
+
+        /**
+         * Returns the result codes for the operation.
+         * @return {typeof Fl64_Tmpl_Back_Service_Render.RESULT}
+         */
+        this.getResultCodes = () => RESULT;
+
         /**
          * Finds, loads, and renders a Mustache template.
          *
@@ -28,7 +45,7 @@ export default class Fl64_Tmpl_Back_Service_Render {
          * @param {string} [params.localePkg] - Default plugin locale.
          * @param {Object} [params.view] - Mustache template context.
          * @param {Object} [params.partials] - Mustache partial templates.
-         * @returns {Promise<{content: string|null}>}
+         * @returns {Promise<{resultCode: string, content: string|null}>}
          */
         this.perform = async function (
             {
@@ -42,6 +59,7 @@ export default class Fl64_Tmpl_Back_Service_Render {
                 partials = {}
             }
         ) {
+            let resultCode = RESULT.UNKNOWN_ERROR;
             let content = null;
             try {
                 // Find the template file path
@@ -52,12 +70,13 @@ export default class Fl64_Tmpl_Back_Service_Render {
                     if (templateContent) {
                         // Render the template using Mustache
                         content = Mustache.render(templateContent, view, partials);
+                        resultCode = RESULT.SUCCESS;
                     }
                 }
             } catch (error) {
                 logger.exception(error);
             }
-            return {content};
+            return {resultCode, content};
         };
     }
 }
