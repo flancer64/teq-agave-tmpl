@@ -1,5 +1,3 @@
-import Mustache from 'mustache';
-
 // VARS
 /**
  * @memberOf Fl64_Tmpl_Back_Service_Render
@@ -15,17 +13,23 @@ Object.freeze(RESULT);
  */
 export default class Fl64_Tmpl_Back_Service_Render {
     /**
+     * @param {typeof import('mustache')} mustache
      * @param {TeqFw_Core_Shared_Api_Logger} logger - Logger instance.
      * @param {Fl64_Tmpl_Back_Act_FindTemplate} actFind
      * @param {Fl64_Tmpl_Back_Act_LoadTemplate} actLoad
      */
     constructor(
         {
+            'node:mustache': mustache,
             TeqFw_Core_Shared_Api_Logger$: logger,
             Fl64_Tmpl_Back_Act_FindTemplate$: actFind,
             Fl64_Tmpl_Back_Act_LoadTemplate$: actLoad,
         }
     ) {
+        // VARS
+        const {default: Mustache} = mustache;
+
+        // MAIN
 
         /**
          * Returns the result codes for the operation.

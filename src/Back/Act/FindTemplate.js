@@ -1,21 +1,25 @@
-import {existsSync} from 'fs';
-import {join} from 'path';
-
 /**
  * @implements {TeqFw_Core_Shared_Api_Action}
  */
 export default class Fl64_Tmpl_Back_Act_FindTemplate {
     /**
+     * @param {typeof import('node:fs')} fs
+     * @param {typeof import('node:path')} path
      * @param {TeqFw_Core_Back_Config} config
      * @param {TeqFw_Core_Shared_Api_Logger} logger - Logger instance.
      */
     constructor(
         {
+            'node:fs': fs,
+            'node:path': path,
             TeqFw_Core_Back_Config$: config,
             TeqFw_Core_Shared_Api_Logger$: logger,
         }
     ) {
         // VARS
+        const {existsSync} = fs;
+        const {join} = path;
+
         /** @type {string} */
         let ROOT_DIR;
 

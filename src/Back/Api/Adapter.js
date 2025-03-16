@@ -1,5 +1,3 @@
-import Fl64_Tmpl_Back_Defaults from '../Defaults.js';
-
 /**
  * Interface for adapting this plugin into an application.
  *
