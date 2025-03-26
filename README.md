@@ -20,5 +20,4 @@ This plugin provides a flexible solution for generating localized content, makin
 pages, email templates, and other structured text formats within **TeqFW**.
 
 ## Integration
-
-- `Fl64_Paypal_Back_Api_Adapter`: implement this interface in an application.
+ 
