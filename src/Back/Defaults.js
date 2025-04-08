@@ -9,11 +9,11 @@ export default class Fl64_Tmpl_Back_Defaults {
     SHARED;
 
     /**
-     * @param {Fl64_Tmpl_Shared_Defaults} SHARED
+     * @param {Fl64_Tmpl_Shared_Defaults} SHARED - shared defaults for the plugin
      */
     constructor(
         {
-            Fl64_Tmpl_Shared_Defaults$: SHARED
+            Fl64_Tmpl_Shared_Defaults$: SHARED,
         }
     ) {
         this.SHARED = SHARED;

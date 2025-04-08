@@ -1,17 +1,10 @@
-// VARS
-/**
- * @memberOf Fl64_Tmpl_Back_Service_Render
- */
-const RESULT = {
-    SUCCESS: 'SUCCESS',
-    UNKNOWN_ERROR: 'UNKNOWN_ERROR',
-};
-Object.freeze(RESULT);
-
 /**
  * @implements {TeqFw_Core_Shared_Api_Service}
  */
 export default class Fl64_Tmpl_Back_Service_Render {
+    /* eslint-disable jsdoc/check-param-names */
+
+    /* eslint-disable jsdoc/require-param-description */
     /**
      * @param {typeof import('mustache')} mustache
      * @param {TeqFw_Core_Shared_Api_Logger} logger - Logger instance.
@@ -40,15 +33,15 @@ export default class Fl64_Tmpl_Back_Service_Render {
         /**
          * Finds, loads, and renders a Mustache template.
          *
-         * @param {Object} params
+         * @param {object} params - Encapsulates input data for flexibility and backward compatibility.
          * @param {string} [params.pkg] - NPM package name (or null for app templates).
          * @param {string} params.type - Template type ('web', 'email', etc.).
          * @param {string} params.name - Template name without extension.
          * @param {string} [params.localeUser] - User-defined locale.
          * @param {string} [params.localeApp] - Default application locale.
          * @param {string} [params.localePkg] - Default plugin locale.
-         * @param {Object} [params.view] - Mustache template context.
-         * @param {Object} [params.partials] - Mustache partial templates.
+         * @param {object} [params.view] - Mustache template context.
+         * @param {object} [params.partials] - Mustache partial templates.
          * @returns {Promise<{resultCode: string, content: string|null}>}
          */
         this.perform = async function (
@@ -84,3 +77,13 @@ export default class Fl64_Tmpl_Back_Service_Render {
         };
     }
 }
+
+// VARS
+/**
+ * @memberOf Fl64_Tmpl_Back_Service_Render
+ */
+const RESULT = {
+    SUCCESS: 'SUCCESS',
+    UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+};
+Object.freeze(RESULT);

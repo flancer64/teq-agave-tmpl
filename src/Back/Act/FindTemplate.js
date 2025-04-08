@@ -2,18 +2,23 @@
  * @implements {TeqFw_Core_Shared_Api_Action}
  */
 export default class Fl64_Tmpl_Back_Act_FindTemplate {
+    /* eslint-disable jsdoc/check-param-names */
+
+    /* eslint-disable jsdoc/require-param-description */
     /**
      * @param {typeof import('node:fs')} fs
-     * @param {typeof import('node:path')} path
+     * @param {typeof import('node:path')}  path
      * @param {TeqFw_Core_Back_Config} config
-     * @param {TeqFw_Core_Shared_Api_Logger} logger - Logger instance.
+     * @param {TeqFw_Core_Shared_Api_Logger} logger
+     * @param {Fl64_Tmpl_Back_Dto_Locale} dtoLocale
      */
     constructor(
         {
             'node:fs': fs,
             'node:path': path,
             TeqFw_Core_Back_Config$: config,
-            TeqFw_Core_Shared_Api_Logger$: logger,
+            TeqFw_Core_Shared_Api_Logger$$: logger,
+            Fl64_Tmpl_Back_Dto_Locale$: dtoLocale,
         }
     ) {
         // VARS
@@ -27,16 +32,18 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
         /**
          * Generates a list of unique locale variants, including both full (`xx-YY`) and short (`xx`) forms.
          *
-         * @param {...(string|undefined)} locales - List of locale values.
+         * @param {Fl64_Tmpl_Back_Dto_Locale.Dto} locale - List of locale values.
          * @returns {string[]} - Unique ordered list of locale variations.
          */
-        function generateUniqueLocales(...locales) {
+        function generateUniqueLocales(locale) {
             const variants = new Set();
-            for (const locale of locales) {
-                if (!locale) continue;
-                variants.add(locale);
-                if (locale.includes('-')) {
-                    variants.add(locale.split('-')[0]);
+            // Arrange the locales by priority
+            const locales = [locale.user, locale.pkg, locale.app];
+            for (const one of locales) {
+                if (!one) {continue;}
+                variants.add(one);
+                if (one.includes('-')) {
+                    variants.add(one.split('-')[0]);
                 }
             }
             return [...variants];
@@ -46,7 +53,7 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
          * @returns {string}
          */
         function getRoot() {
-            if (!ROOT_DIR) ROOT_DIR = config.getPathToRoot();
+            if (!ROOT_DIR) {ROOT_DIR = config.getPathToRoot();}
             return ROOT_DIR;
         }
 
@@ -54,20 +61,27 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
         /**
          * Finds the absolute path of the requested template file based on priority rules.
          *
-         * @param {Object} params
-         * @param {string} [params.pkg] - The package name (`@vendor/pkg`) or empty for the application.
-         * @param {string} params.type - The template type (`email`, `web`, `text`).
+         * @param {object} params
          * @param {string} params.name - The template name (including relative path and extension).
-         * @param {string} [params.localeUser] - User-defined locale.
-         * @param {string} [params.localeApp] - Default application locale.
-         * @param {string} [params.localePkg] - Default plugin locale.
+         * @param {string} params.type - The template type (`email`, `web`, `text`).
+         * @param {string} [params.pkg] - The package name (`@vendor/pkg`) or empty for the application.
+         * @param {Fl64_Tmpl_Back_Dto_Locale.Dto} [params.locale] - The locales.
+         * @param {string} [params.localeUser] - (deprecated) User-defined locale.
+         * @param {string} [params.localeApp] - (deprecated) Default application locale.
+         * @param {string} [params.localePkg] - (deprecated) Default plugin locale.
          * @returns {Promise<{path: string|null}>} - The path to the found template or `null` if not found.
          */
-        this.run = async function ({pkg, type, name, localeUser, localeApp, localePkg}) {
+        this.run = async function ({name, type, pkg, locale, localeUser, localeApp, localePkg}) {
             let path = null;
             const basePaths = [];
             const root = getRoot();
-            const locales = generateUniqueLocales(localeUser, localeApp, localePkg);
+            if (!locale) {
+                locale = dtoLocale.create();
+                locale.app = localeApp;
+                locale.pkg = localePkg;
+                locale.user = localeUser;
+            }
+            const locales = generateUniqueLocales(locale);
 
             if (!pkg) {
                 // Searching in the application template directory
@@ -95,8 +109,9 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
                     break;
                 }
             }
-            if (!path)
+            if (!path) {
                 logger.error(`Template '${name}' not found for type '${type}', pkg '${pkg || 'app'}', locales '${locales.join(', ')}'.`);
+            }
             return {path};
         };
     }
