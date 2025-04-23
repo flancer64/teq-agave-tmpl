@@ -23,7 +23,7 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
     ) {
         // VARS
         const {existsSync} = fs;
-        const {join} = path;
+        const {join, normalize} = path;
 
         /** @type {string} */
         let ROOT_DIR;
@@ -86,21 +86,21 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
             if (!pkg) {
                 // Searching in the application template directory
                 for (const locale of locales) {
-                    basePaths.push(join(root, 'tmpl', type, locale, name));
+                    basePaths.push(normalize(join(root, 'tmpl', type, locale, name)));
                 }
-                basePaths.push(join(root, 'tmpl', type, name)); // No locale fallback
+                basePaths.push(normalize(join(root, 'tmpl', type, name))); // No locale fallback
             } else {
                 // Searching in adapted templates (application overrides)
                 for (const locale of locales) {
-                    basePaths.push(join(root, 'tmpl', 'adapt', pkg, type, locale, name));
+                    basePaths.push(normalize(join(root, 'tmpl', 'adapt', pkg, type, locale, name)));
                 }
-                basePaths.push(join(root, 'tmpl', 'adapt', pkg, type, name)); // No locale fallback
+                basePaths.push(normalize(join(root, 'tmpl', 'adapt', pkg, type, name))); // No locale fallback
 
                 // Searching in the original plugin inside node_modules
                 for (const locale of locales) {
-                    basePaths.push(join(root, 'node_modules', pkg, 'tmpl', type, locale, name));
+                    basePaths.push(normalize(join(root, 'node_modules', pkg, 'tmpl', type, locale, name)));
                 }
-                basePaths.push(join(root, 'node_modules', pkg, 'tmpl', type, name)); // No locale fallback
+                basePaths.push(normalize(join(root, 'node_modules', pkg, 'tmpl', type, name))); // No locale fallback
             }
 
             for (const one of basePaths) {
