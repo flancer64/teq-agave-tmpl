@@ -29,7 +29,7 @@ export default class Fl64_Tmpl_Back_Service_Render_Web {
         this.getResultCodes = () => RESULT;
 
         /**
-         * @param {object} params - Encapsulates input data for flexibility and backward compatibility.
+         * @param {object} params - Parameters object.
          * @param {string} [params.pkg] - NPM package name (or null for app templates).
          * @param {string} params.name - Template name without extension.
          * @param {string} [params.localePkg] - Default locale for a teq-plugin (package).

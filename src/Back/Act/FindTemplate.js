@@ -61,7 +61,7 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
         /**
          * Finds the absolute path of the requested template file based on priority rules.
          *
-         * @param {object} params
+         * @param {object} params - Parameters object.
          * @param {string} params.name - The template name (including relative path and extension).
          * @param {string} params.type - The template type (`email`, `web`, `text`).
          * @param {string} [params.pkg] - The package name (`@vendor/pkg`) or empty for the application.

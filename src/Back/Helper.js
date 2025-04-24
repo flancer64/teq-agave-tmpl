@@ -20,7 +20,7 @@ export default class Fl64_Tmpl_Back_Helper {
         /**
          * Load a web template based on the given parameters.
          *
-         * @param {object} params - Encapsulates input data for flexibility and backward compatibility.
+         * @param {object} params - Parameters object.
          * @param {string} params.name - Template name including relative path and extension.
          * @param {string} [params.pkg] - NPM package name or null to use app-level templates.
          * @param {Fl64_Tmpl_Back_Dto_Locale.Dto} [params.locale] - Locale information used for template resolution.

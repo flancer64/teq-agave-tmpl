@@ -22,7 +22,7 @@ export default class Fl64_Tmpl_Back_Act_LoadTemplate {
         /**
          * Load the template file content.
          *
-         * @param {object} params
+         * @param {object} params - Parameters object.
          * @param {string} params.path - Absolute or relative path to the template file.
          * @returns {Promise<{content: string|null}>}
          */

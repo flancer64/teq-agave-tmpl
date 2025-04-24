@@ -1,32 +1,6 @@
 /**
  * Represents the data transfer object (DTO) for template rendering context.
  *
- * @memberOf Fl64_Tmpl_Back_Dto_Context
- */
-class Dto {
-    /**
-     * Locale settings DTO.
-     *
-     * @type {Fl64_Tmpl_Back_Dto_Locale.Dto}
-     */
-    locale;
-
-    /**
-     * Data for Mustache template rendering.
-     *
-     * @type {object}
-     */
-    view;
-
-    /**
-     * Partials for Mustache template rendering.
-     *
-     * @type {object}
-     */
-    partials;
-}
-
-/**
  * Factory class for creating instances of `Fl64_Tmpl_Back_Dto_Context.Dto`.
  * Provides type casting and basic validation.
  *
@@ -59,4 +33,30 @@ export default class Fl64_Tmpl_Back_Dto_Context {
             return res;
         };
     }
+}
+
+/**
+ * @memberOf Fl64_Tmpl_Back_Dto_Context
+ */
+class Dto {
+    /**
+     * Locale settings DTO.
+     *
+     * @type {Fl64_Tmpl_Back_Dto_Locale.Dto}
+     */
+    locale;
+
+    /**
+     * Data for Mustache template rendering.
+     *
+     * @type {object}
+     */
+    view;
+
+    /**
+     * Partials for Mustache template rendering.
+     *
+     * @type {object}
+     */
+    partials;
 }
