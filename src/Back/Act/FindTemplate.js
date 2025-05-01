@@ -23,7 +23,7 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
     ) {
         // VARS
         const {existsSync} = fs;
-        const {join, normalize} = path;
+        const {join, normalize, resolve} = path;
 
         /** @type {string} */
         let ROOT_DIR;
@@ -104,8 +104,9 @@ export default class Fl64_Tmpl_Back_Act_FindTemplate {
             }
 
             for (const one of basePaths) {
-                if (existsSync(one)) {
-                    path = one;
+                const plain = resolve(one);
+                if (plain.startsWith(getRoot()) && existsSync(plain)) {
+                    path = plain;
                     break;
                 }
             }
